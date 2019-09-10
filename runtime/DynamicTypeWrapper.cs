@@ -5756,11 +5756,16 @@ namespace IKVM.Internal
 					{
 						return null;
 					}
-					if (!SecurityManager.IsGranted(new SecurityPermission(SecurityPermissionFlag.Assertion)) ||
-						!SecurityManager.IsGranted(new ReflectionPermission(ReflectionPermissionFlag.MemberAccess)))
+
+					PermissionSet reqPerms = new PermissionSet(PermissionState.None);
+					reqPerms.AddPermission(new SecurityPermission(SecurityPermissionFlag.Assertion));
+					reqPerms.AddPermission(new ReflectionPermission(ReflectionPermissionFlag.MemberAccess));
+
+					if (!reqPerms.IsSubsetOf(AppDomain.CurrentDomain.PermissionSet))
 					{
 						return null;
 					}
+
 					FieldInfo[] fields = new FieldInfo[list.Length];
 					for (int i = 0; i < list.Length; i++)
 					{
@@ -5770,6 +5775,7 @@ namespace IKVM.Internal
 							return null;
 						}
 					}
+
 					return fields;
 				}
 
