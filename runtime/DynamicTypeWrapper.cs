@@ -5749,7 +5749,7 @@ namespace IKVM.Internal
 				}
 
 				[SecurityCritical]
-				[SecurityTreatAsSafe]
+				[SecuritySafeCriticalAttribute]
 				private static FieldInfo[] GetFieldList(Type type, string[] list)
 				{
 					if (JVM.SafeGetEnvironmentVariable("IKVM_DISABLE_TYPEBUILDER_HACK") != null || !IsSupportedVersion)
@@ -5774,7 +5774,7 @@ namespace IKVM.Internal
 				}
 
 				[SecurityCritical]
-				[SecurityTreatAsSafe]
+				[SecuritySafeCriticalAttribute]
 				internal static void Process(DynamicTypeWrapper wrapper)
 				{
 					if (m_methodBuilder != null && methodBuilderFields != null && fieldBuilderFields != null)
