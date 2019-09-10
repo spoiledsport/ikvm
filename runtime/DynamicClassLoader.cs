@@ -592,11 +592,7 @@ namespace IKVM.Internal
 
 		private static AssemblyBuilder DefineDynamicAssembly(AssemblyName name, AssemblyBuilderAccess access, IEnumerable<CustomAttributeBuilder> assemblyAttributes)
 		{
-#if NET_4_0
 			return AppDomain.CurrentDomain.DefineDynamicAssembly(name, access, null, true, assemblyAttributes);
-#else
-			return AppDomain.CurrentDomain.DefineDynamicAssembly(name, access, null, null, null, null, null, true, assemblyAttributes);
-#endif
 		}
 #endif // !STATIC_COMPILER
 	}
